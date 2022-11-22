@@ -2,7 +2,9 @@
 import pymongo
 from pymongo import MongoClient
 
-client = MongoClient()
+
+password = "MOTZD4kKGHvwidaN"
+client = MongoClient(f"mongodb+srv://example_user:{password}@soliton.pivsely.mongodb.net/?retryWrites=true&w=majority")
 
 from bson.objectid import ObjectId
 

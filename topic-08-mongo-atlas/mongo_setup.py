@@ -1,5 +1,12 @@
 from pymongo import MongoClient
-client = MongoClient()
+
+import json
+with open("/home/srfenton/.private.json", "r") as f:
+    private = json.load(f)
+
+# password = private["example"]
+password = "MOTZD4kKGHvwidaN"
+client = MongoClient(f"mongodb+srv://example_user:{password}@soliton.pivsely.mongodb.net/?retryWrites=true&w=majority")
 
 from bson.objectid import ObjectId
 
@@ -18,3 +25,5 @@ list_collection.insert_many([
 
 items = list(list_collection.find())
 print(items)
+
+

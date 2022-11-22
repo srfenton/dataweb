@@ -1,4 +1,4 @@
-from bottle import default_app, route, get, post, request, redirect, template
+from bottle import default_app, route, get, post, template, request, redirect, run
 import sqlite3
 
 connection = sqlite3.connect("shopping_list.db")
@@ -9,7 +9,7 @@ def hello_world():
 
 @route('/hi')
 def hi_world():
-    return 'Hi from sf'
+    return 'Hi from sf!'
 
 @route('/bye')
 def bye_world():
@@ -20,7 +20,7 @@ def get_list():
     cursor = connection.cursor()
     rows = cursor.execute("select id, description from list")
     rows = list(rows)
-    rows = [ {'id':row[0] ,'desc':row[1]} for row in rows ]
+    rows = [ {'id':row[0] ,'description':row[1]} for row in rows ]
     return template("shopping_list.tpl", name="sf", shopping_list=rows)
 
 @get('/add')
@@ -61,5 +61,5 @@ def post_edit(id):
     redirect('/list')
 
 
-application = default_app()
-
+# application = default_app()
+run(host='localhost', port=8080)

@@ -1,0 +1,602 @@
+$ ssh root@24.199.92.43
+The authenticity of host '24.199.92.43 (24.199.92.43)' can't be established.
+ED25519 key fingerprint is SHA256:8LAVSBWBx/bNup4CNt4kUHx0D7AGrBpjO2rXqhVuWeM.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '24.199.92.43' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-122-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Thu Nov 17 02:06:26 UTC 2022
+
+  System load:  0.28              Users logged in:       0
+  Usage of /:   3.1% of 48.27GB   IPv4 address for eth0: 24.199.92.43
+  Memory usage: 11%               IPv4 address for eth0: 10.10.0.5
+  Swap usage:   0%                IPv4 address for eth1: 10.136.0.2
+  Processes:    113
+
+8 updates can be applied immediately.
+7 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@www22-gregdelozier-com:~# ls
+snap
+root@www22-gregdelozier-com:~# curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key ad^C
+root@www22-gregdelozier-com:~# curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
+OK
+root@www22-gregdelozier-com:~# apt-key list
+/etc/apt/trusted.gpg
+--------------------
+pub   rsa4096 2019-05-28 [SC] [expires: 2024-05-26]
+      2069 1EEC 3521 6C63 CAF6  6CE1 6564 08E3 90CF B1F5
+uid           [ unknown] MongoDB 4.4 Release Signing Key <packaging@mongodb.com>
+
+/etc/apt/trusted.gpg.d/ubuntu-keyring-2012-archive.gpg
+------------------------------------------------------
+pub   rsa4096 2012-05-11 [SC]
+      790B C727 7767 219C 42C8  6F93 3B4F E6AC C0B2 1F32
+uid           [ unknown] Ubuntu Archive Automatic Signing Key (2012) <ftpmaster@ubuntu.com>
+
+/etc/apt/trusted.gpg.d/ubuntu-keyring-2012-cdimage.gpg
+------------------------------------------------------
+pub   rsa4096 2012-05-11 [SC]
+      8439 38DF 228D 22F7 B374  2BC0 D94A A3F0 EFE2 1092
+uid           [ unknown] Ubuntu CD Image Automatic Signing Key (2012) <cdimage@ubuntu.com>
+
+/etc/apt/trusted.gpg.d/ubuntu-keyring-2018-archive.gpg
+------------------------------------------------------
+pub   rsa4096 2018-09-17 [SC]
+      F6EC B376 2474 EDA9 D21B  7022 8719 20D1 991B C93C
+uid           [ unknown] Ubuntu Archive Automatic Signing Key (2018) <ftpmaster@ubuntu.com>
+
+root@www22-gregdelozier-com:~# echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse
+root@www22-gregdelozier-com:~# apt update
+Get:1 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Ign:2 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 InRelease      
+Hit:3 https://repos-droplet.digitalocean.com/apt/droplet-agent main InRelease  
+Hit:4 http://mirrors.digitalocean.com/ubuntu focal InRelease
+Get:5 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 Release [5386 B]
+Get:6 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 Release.gpg [801 B]
+Get:7 http://mirrors.digitalocean.com/ubuntu focal-updates InRelease [114 kB]
+Get:8 http://mirrors.digitalocean.com/ubuntu focal-backports InRelease [108 kB]
+Get:9 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [1850 kB]
+Get:10 http://security.ubuntu.com/ubuntu focal-security/main Translation-en [305 kB]
+Get:11 http://security.ubuntu.com/ubuntu focal-security/main amd64 c-n-f Metadata [11.2 kB]
+Get:12 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [1327 kB]
+Get:13 http://security.ubuntu.com/ubuntu focal-security/restricted Translation-en [188 kB]
+Get:14 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 c-n-f Metadata [640 B]
+Get:15 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [770 kB]
+Get:16 http://security.ubuntu.com/ubuntu focal-security/universe Translation-en [148 kB]
+Get:17 http://security.ubuntu.com/ubuntu focal-security/universe amd64 c-n-f Metadata [16.7 kB]
+Get:18 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [22.2 kB]
+Get:19 http://security.ubuntu.com/ubuntu focal-security/multiverse Translation-en [5400 B]
+Get:20 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 c-n-f Metadata [516 B]
+Get:21 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 Packages [30.2 kB]
+Get:22 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse arm64 Packages [23.2 kB]
+Get:23 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 Packages [2230 kB]
+Get:24 http://mirrors.digitalocean.com/ubuntu focal-updates/main Translation-en [389 kB]
+Get:25 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 c-n-f Metadata [16.0 kB]
+Get:26 http://mirrors.digitalocean.com/ubuntu focal-updates/restricted amd64 Packages [1421 kB]
+Get:27 http://mirrors.digitalocean.com/ubuntu focal-updates/restricted Translation-en [200 kB]
+Get:28 http://mirrors.digitalocean.com/ubuntu focal-updates/restricted amd64 c-n-f Metadata [636 B]
+Get:29 http://mirrors.digitalocean.com/ubuntu focal-updates/universe amd64 Packages [997 kB]
+Get:30 http://mirrors.digitalocean.com/ubuntu focal-updates/universe Translation-en [231 kB]
+Get:31 http://mirrors.digitalocean.com/ubuntu focal-updates/universe amd64 c-n-f Metadata [23.0 kB]
+Get:32 http://mirrors.digitalocean.com/ubuntu focal-updates/multiverse amd64 Packages [24.5 kB]
+Get:33 http://mirrors.digitalocean.com/ubuntu focal-updates/multiverse Translation-en [7316 B]
+Get:34 http://mirrors.digitalocean.com/ubuntu focal-updates/multiverse amd64 c-n-f Metadata [592 B]
+Get:35 http://mirrors.digitalocean.com/ubuntu focal-backports/main amd64 Packages [45.7 kB]
+Get:36 http://mirrors.digitalocean.com/ubuntu focal-backports/main Translation-en [16.3 kB]
+Get:37 http://mirrors.digitalocean.com/ubuntu focal-backports/main amd64 c-n-f Metadata [1420 B]
+Get:38 http://mirrors.digitalocean.com/ubuntu focal-backports/universe amd64 Packages [24.0 kB]
+Get:39 http://mirrors.digitalocean.com/ubuntu focal-backports/universe Translation-en [16.0 kB]
+Get:40 http://mirrors.digitalocean.com/ubuntu focal-backports/universe amd64 c-n-f Metadata [864 B]
+Fetched 10.7 MB in 3s (3885 kB/s)                      
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+83 packages can be upgraded. Run 'apt list --upgradable' to see them.
+root@www22-gregdelozier-com:~# apt install mongodb-org
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  mongodb-database-tools mongodb-org-database-tools-extra mongodb-org-mongos
+  mongodb-org-server mongodb-org-shell mongodb-org-tools
+The following NEW packages will be installed:
+  mongodb-database-tools mongodb-org mongodb-org-database-tools-extra
+  mongodb-org-mongos mongodb-org-server mongodb-org-shell mongodb-org-tools
+0 upgraded, 7 newly installed, 0 to remove and 83 not upgraded.
+Need to get 98.2 MB of archives.
+After this operation, 203 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-database-tools amd64 100.6.1 [48.0 MB]
+Get:2 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-org-shell amd64 4.4.18 [13.4 MB]
+Get:3 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-org-server amd64 4.4.18 [20.8 MB]
+Get:4 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-org-mongos amd64 4.4.18 [16.1 MB]
+Get:5 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-org-database-tools-extra amd64 4.4.18 [7756 B]
+Get:6 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-org-tools amd64 4.4.18 [2896 B]
+Get:7 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-org amd64 4.4.18 [3524 B]
+Fetched 98.2 MB in 1s (72.0 MB/s)
+Selecting previously unselected package mongodb-database-tools.
+(Reading database ... 63829 files and directories currently installed.)
+Preparing to unpack .../0-mongodb-database-tools_100.6.1_amd64.deb ...
+Unpacking mongodb-database-tools (100.6.1) ...
+Selecting previously unselected package mongodb-org-shell.
+Preparing to unpack .../1-mongodb-org-shell_4.4.18_amd64.deb ...
+Unpacking mongodb-org-shell (4.4.18) ...
+Selecting previously unselected package mongodb-org-server.
+Preparing to unpack .../2-mongodb-org-server_4.4.18_amd64.deb ...
+Unpacking mongodb-org-server (4.4.18) ...
+Selecting previously unselected package mongodb-org-mongos.
+Preparing to unpack .../3-mongodb-org-mongos_4.4.18_amd64.deb ...
+Unpacking mongodb-org-mongos (4.4.18) ...
+Selecting previously unselected package mongodb-org-database-tools-extra.
+Preparing to unpack .../4-mongodb-org-database-tools-extra_4.4.18_amd64.deb ...
+Unpacking mongodb-org-database-tools-extra (4.4.18) ...
+Selecting previously unselected package mongodb-org-tools.
+Preparing to unpack .../5-mongodb-org-tools_4.4.18_amd64.deb ...
+Unpacking mongodb-org-tools (4.4.18) ...
+Selecting previously unselected package mongodb-org.
+Preparing to unpack .../6-mongodb-org_4.4.18_amd64.deb ...
+Unpacking mongodb-org (4.4.18) ...
+Setting up mongodb-org-server (4.4.18) ...
+Adding system user `mongodb' (UID 112) ...
+Adding new user `mongodb' (UID 112) with group `nogroup' ...
+Not creating home directory `/home/mongodb'.
+Adding group `mongodb' (GID 119) ...
+Done.
+Adding user `mongodb' to group `mongodb' ...
+Adding user mongodb to group mongodb
+Done.
+Setting up mongodb-org-shell (4.4.18) ...
+Setting up mongodb-database-tools (100.6.1) ...
+Setting up mongodb-org-mongos (4.4.18) ...
+Setting up mongodb-org-database-tools-extra (4.4.18) ...
+Setting up mongodb-org-tools (4.4.18) ...
+Setting up mongodb-org (4.4.18) ...
+Processing triggers for man-db (2.9.1-1) ...
+root@www22-gregdelozier-com:~# systemctl start mongod.service
+root@www22-gregdelozier-com:~# systemctl status mongod 
+● mongod.service - MongoDB Database Server
+     Loaded: loaded (/lib/systemd/system/mongod.service; disabled; vendor prese>
+     Active: active (running) since Thu 2022-11-17 02:15:43 UTC; 16s ago
+       Docs: https://docs.mongodb.org/manual
+   Main PID: 2959 (mongod)
+     Memory: 60.1M
+     CGroup: /system.slice/mongod.service
+             └─2959 /usr/bin/mongod --config /etc/mongod.conf
+root@www22-gregdelozier-com:~# systemctl enable mongod
+Created symlink /etc/systemd/system/multi-user.target.wants/mongod.service → /lib/systemd/system/mongod.service.
+root@www22-gregdelozier-com:~# mongo
+MongoDB shell version v4.4.18
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("2d839284-e395-42d4-9350-c1218f63b38f") }
+MongoDB server version: 4.4.18
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+	https://docs.mongodb.com/
+Questions? Try the MongoDB Developer Community Forums
+	https://community.mongodb.com
+---
+The server generated these startup warnings when booting: 
+        2022-11-17T02:15:43.799+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+        2022-11-17T02:15:44.432+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> 
+bye
+root@www22-gregdelozier-com:~# mongo --version
+MongoDB shell version v4.4.18
+Build Info: {
+    "version": "4.4.18",
+    "gitVersion": "8ed32b5c2c68ebe7f8ae2ebe8d23f36037a17dea",
+    "openSSLVersion": "OpenSSL 1.1.1f  31 Mar 2020",
+    "modules": [],
+    "allocator": "tcmalloc",
+    "environment": {
+        "distmod": "ubuntu2004",
+        "distarch": "x86_64",
+        "target_arch": "x86_64"
+    }
+}
+root@www22-gregdelozier-com:~# mongo --eval 'db.runCommand({ connectionStatus: 1 })'
+MongoDB shell version v4.4.18
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("c773fd64-711d-4c58-9496-8094b6a66325") }
+MongoDB server version: 4.4.18
+{
+	"authInfo" : {
+		"authenticatedUsers" : [ ],
+		"authenticatedUserRoles" : [ ]
+	},
+	"ok" : 1
+}
+root@www22-gregdelozier-com:~# systemctl status mongod
+● mongod.service - MongoDB Database Server
+     Loaded: loaded (/lib/systemd/system/mongod.service; enabled; vendor preset>
+     Active: active (running) since Thu 2022-11-17 02:15:43 UTC; 4min 49s ago
+       Docs: https://docs.mongodb.org/manual
+   Main PID: 2959 (mongod)
+     Memory: 61.2M
+     CGroup: /system.slice/mongod.service
+             └─2959 /usr/bin/mongod --config /etc/mongod.conf
+root@www22-gregdelozier-com:~# systemctl stop mongod
+root@www22-gregdelozier-com:~# mongo --eval 'db.runCommand({ connectionStatus: 1 })'
+MongoDB shell version v4.4.18
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Error: couldn't connect to server 127.0.0.1:27017, connection attempt failed: SocketException: Error connecting to 127.0.0.1:27017 :: caused by :: Connection refused :
+connect@src/mongo/shell/mongo.js:374:17
+@(connect):2:6
+exception: connect failed
+exiting with code 1
+root@www22-gregdelozier-com:~# systemctl start mongod
+root@www22-gregdelozier-com:~# mongo --eval 'db.runCommand({ connectionStatus: 1 })'
+MongoDB shell version v4.4.18
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("40c7923c-747c-4921-bcb9-d7fe88cc3e06") }
+MongoDB server version: 4.4.18
+{
+	"authInfo" : {
+		"authenticatedUsers" : [ ],
+		"authenticatedUserRoles" : [ ]
+	},
+	"ok" : 1
+}
+root@www22-gregdelozier-com:~# systemctl restart mongod
+root@www22-gregdelozier-com:~# mongo --eval 'db.runCommand({ connectionStatus: 1 })'
+MongoDB shell version v4.4.18
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("77c3dc61-c061-48cc-afcc-a0d874d7d3f7") }
+MongoDB server version: 4.4.18
+{
+	"authInfo" : {
+		"authenticatedUsers" : [ ],
+		"authenticatedUserRoles" : [ ]
+	},
+	"ok" : 1
+}
+root@www22-gregdelozier-com:~# ps
+    PID TTY          TIME CMD
+   1890 pts/0    00:00:00 bash
+   3326 pts/0    00:00:00 ps
+root@www22-gregdelozier-com:~# ps -aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.2  0.6 105768 12876 ?        Ss   02:03   0:03 /sbin/init
+root           2  0.0  0.0      0     0 ?        S    02:03   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        I<   02:03   0:00 [rcu_gp]
+root           4  0.0  0.0      0     0 ?        I<   02:03   0:00 [rcu_par_gp]
+root           6  0.0  0.0      0     0 ?        I<   02:03   0:00 [kworker/0:0H
+root           7  0.0  0.0      0     0 ?        I    02:03   0:00 [kworker/0:1-
+root           8  0.0  0.0      0     0 ?        I    02:03   0:00 [kworker/u2:0
+root           9  0.0  0.0      0     0 ?        I<   02:03   0:00 [mm_percpu_wq
+root          10  0.0  0.0      0     0 ?        S    02:03   0:00 [ksoftirqd/0]
+root          11  0.0  0.0      0     0 ?        I    02:03   0:00 [rcu_sched]
+root          12  0.0  0.0      0     0 ?        S    02:03   0:00 [migration/0]
+root          13  0.0  0.0      0     0 ?        S    02:03   0:00 [idle_inject/
+root          14  0.0  0.0      0     0 ?        S    02:03   0:00 [cpuhp/0]
+root          15  0.0  0.0      0     0 ?        S    02:03   0:00 [kdevtmpfs]
+root          16  0.0  0.0      0     0 ?        I<   02:03   0:00 [netns]
+root          17  0.0  0.0      0     0 ?        S    02:03   0:00 [rcu_tasks_kt
+root          18  0.0  0.0      0     0 ?        S    02:03   0:00 [kauditd]
+root          19  0.0  0.0      0     0 ?        S    02:03   0:00 [khungtaskd]
+root          20  0.0  0.0      0     0 ?        S    02:03   0:00 [oom_reaper]
+root          21  0.0  0.0      0     0 ?        I<   02:03   0:00 [writeback]
+root          22  0.0  0.0      0     0 ?        S    02:03   0:00 [kcompactd0]
+root          23  0.0  0.0      0     0 ?        SN   02:03   0:00 [ksmd]
+root          24  0.0  0.0      0     0 ?        SN   02:03   0:00 [khugepaged]
+root          70  0.0  0.0      0     0 ?        I<   02:03   0:00 [kintegrityd]
+root          71  0.0  0.0      0     0 ?        I<   02:03   0:00 [kblockd]
+root          72  0.0  0.0      0     0 ?        I<   02:03   0:00 [blkcg_punt_b
+root          73  0.0  0.0      0     0 ?        I<   02:03   0:00 [tpm_dev_wq]
+root          74  0.0  0.0      0     0 ?        I<   02:03   0:00 [ata_sff]
+root          75  0.0  0.0      0     0 ?        I<   02:03   0:00 [md]
+root          76  0.0  0.0      0     0 ?        I<   02:03   0:00 [edac-poller]
+root          77  0.0  0.0      0     0 ?        I<   02:03   0:00 [devfreq_wq]
+root          78  0.0  0.0      0     0 ?        S    02:03   0:00 [watchdogd]
+root          79  0.0  0.0      0     0 ?        I    02:03   0:00 [kworker/u2:1
+root          81  0.0  0.0      0     0 ?        S    02:03   0:00 [kswapd0]
+root          82  0.0  0.0      0     0 ?        S    02:03   0:00 [ecryptfs-kth
+root          84  0.0  0.0      0     0 ?        I<   02:03   0:00 [kthrotld]
+root          85  0.0  0.0      0     0 ?        I<   02:03   0:00 [acpi_thermal
+root          86  0.0  0.0      0     0 ?        S    02:03   0:00 [scsi_eh_0]
+root          87  0.0  0.0      0     0 ?        I<   02:03   0:00 [scsi_tmf_0]
+root          88  0.0  0.0      0     0 ?        S    02:03   0:00 [scsi_eh_1]
+root          89  0.0  0.0      0     0 ?        I<   02:03   0:00 [scsi_tmf_1]
+root          91  0.0  0.0      0     0 ?        I<   02:03   0:00 [vfio-irqfd-c
+root          93  0.0  0.0      0     0 ?        I<   02:03   0:00 [ipv6_addrcon
+root         102  0.0  0.0      0     0 ?        I<   02:03   0:00 [kstrp]
+root         105  0.0  0.0      0     0 ?        I<   02:03   0:00 [kworker/u3:0
+root         118  0.0  0.0      0     0 ?        I<   02:03   0:00 [charger_mana
+root         157  0.0  0.0      0     0 ?        S    02:03   0:00 [scsi_eh_2]
+root         158  0.0  0.0      0     0 ?        I<   02:03   0:00 [scsi_tmf_2]
+root         159  0.0  0.0      0     0 ?        I<   02:03   0:00 [kworker/0:1H
+root         164  0.0  0.0      0     0 ?        I<   02:03   0:00 [cryptd]
+root         224  0.0  0.0      0     0 ?        I<   02:04   0:00 [raid5wq]
+root         264  0.0  0.0      0     0 ?        S    02:04   0:00 [jbd2/vda1-8]
+root         265  0.0  0.0      0     0 ?        I<   02:04   0:00 [ext4-rsv-con
+root         336  0.0  0.4  35744  9196 ?        S<s  02:04   0:00 /lib/systemd/
+root         352  0.0  0.0      0     0 ?        I<   02:04   0:00 [ipmi-msghand
+root         447  0.0  0.0      0     0 ?        I<   02:04   0:00 [kaluad]
+root         448  0.0  0.0      0     0 ?        I<   02:04   0:00 [kmpath_rdacd
+root         449  0.0  0.0      0     0 ?        I<   02:04   0:00 [kmpathd]
+root         450  0.0  0.0      0     0 ?        I<   02:04   0:00 [kmpath_handl
+root         451  0.0  0.8 280196 17996 ?        SLsl 02:04   0:00 /sbin/multipa
+root         461  0.0  0.0      0     0 ?        S<   02:04   0:00 [loop0]
+root         463  0.0  0.0      0     0 ?        S<   02:04   0:00 [loop1]
+root         464  0.0  0.0      0     0 ?        S<   02:04   0:00 [loop2]
+systemd+     483  0.0  0.2  90872  6048 ?        Ssl  02:04   0:00 /lib/systemd/
+systemd+     546  0.0  0.3  19188  7868 ?        Ss   02:04   0:00 /lib/systemd/
+systemd+     586  0.0  0.6  24564 12232 ?        Ss   02:04   0:00 /lib/systemd/
+root         610  0.0  0.2  20036  5948 ?        Ss   02:04   0:00 /lib/systemd/
+root         722  0.0  0.4 240920  9196 ?        Ssl  02:04   0:00 /usr/lib/acco
+root         729  0.0  0.1   8536  2700 ?        Ss   02:04   0:00 /usr/sbin/cro
+message+     730  0.0  0.2   7664  4792 ?        Ss   02:04   0:00 /usr/bin/dbus
+root         737  0.0  0.9  29604 18312 ?        Ss   02:04   0:00 /usr/bin/pyth
+root         739  0.0  0.4 236308  8972 ?        Ssl  02:04   0:00 /usr/lib/poli
+syslog       744  0.0  0.2 224344  5184 ?        Ssl  02:04   0:00 /usr/sbin/rsy
+root         745  0.1  2.4 743480 49296 ?        Ssl  02:04   0:01 /usr/lib/snap
+root         746  0.0  0.3  17292  7676 ?        Ss   02:04   0:00 /lib/systemd/
+root         748  0.0  0.6 395492 13804 ?        Ssl  02:04   0:00 /usr/lib/udis
+daemon       749  0.0  0.1   3792  2252 ?        Ss   02:04   0:00 /usr/sbin/atd
+root         794  0.0  0.6 318816 13676 ?        Ssl  02:04   0:00 /usr/sbin/Mod
+root         809  0.0  0.1   7352  2260 ttyS0    Ss+  02:04   0:00 /sbin/agetty 
+root         824  0.0  1.0 108112 20600 ?        Ssl  02:04   0:00 /usr/bin/pyth
+root         910  0.0  0.3  12172  7316 ?        Ss   02:04   0:00 sshd: /usr/sb
+root        1648  0.0  0.2 1299172 5384 ?        Ssl  02:04   0:00 /opt/digitalo
+root        1754  0.0  0.0   5828  1708 tty1     Ss+  02:05   0:00 /sbin/agetty 
+root        1768  0.0  0.4  13812  8804 ?        Ss   02:06   0:00 sshd: root@pt
+root        1790  0.0  0.4  19068  9612 ?        Ss   02:06   0:00 /lib/systemd/
+root        1791  0.0  0.2 105160  4444 ?        S    02:06   0:00 (sd-pam)
+root        1890  0.0  0.2  10032  4984 pts/0    Ss   02:06   0:00 -bash
+root        3082  0.0  0.0      0     0 ?        I    02:19   0:00 [kworker/0:0-
+mongodb     3242  1.0  5.1 1517544 104480 ?      Ssl  02:22   0:01 /usr/bin/mong
+root        3327  0.0  0.1  10808  3484 pts/0    R+   02:25   0:00 ps -aux
+root@www22-gregdelozier-com:~# ps -aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.2  0.6 105768 12876 ?        Ss   02:03   0:03 /sbin/init
+root           2  0.0  0.0      0     0 ?        S    02:03   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        I<   02:03   0:00 [rcu_gp]
+root           4  0.0  0.0      0     0 ?        I<   02:03   0:00 [rcu_par_gp]
+root           6  0.0  0.0      0     0 ?        I<   02:03   0:00 [kworker/0:0H-kblockd]
+root           7  0.0  0.0      0     0 ?        I    02:03   0:00 [kworker/0:1-events]
+root           8  0.0  0.0      0     0 ?        I    02:03   0:00 [kworker/u2:0-events_unbound]
+root           9  0.0  0.0      0     0 ?        I<   02:03   0:00 [mm_percpu_wq]
+root          10  0.0  0.0      0     0 ?        S    02:03   0:00 [ksoftirqd/0]
+root          11  0.0  0.0      0     0 ?        I    02:03   0:00 [rcu_sched]
+root          12  0.0  0.0      0     0 ?        S    02:03   0:00 [migration/0]
+root          13  0.0  0.0      0     0 ?        S    02:03   0:00 [idle_inject/0]
+root          14  0.0  0.0      0     0 ?        S    02:03   0:00 [cpuhp/0]
+root          15  0.0  0.0      0     0 ?        S    02:03   0:00 [kdevtmpfs]
+root          16  0.0  0.0      0     0 ?        I<   02:03   0:00 [netns]
+root          17  0.0  0.0      0     0 ?        S    02:03   0:00 [rcu_tasks_kthre]
+root          18  0.0  0.0      0     0 ?        S    02:03   0:00 [kauditd]
+root          19  0.0  0.0      0     0 ?        S    02:03   0:00 [khungtaskd]
+root          20  0.0  0.0      0     0 ?        S    02:03   0:00 [oom_reaper]
+root          21  0.0  0.0      0     0 ?        I<   02:03   0:00 [writeback]
+root          22  0.0  0.0      0     0 ?        S    02:03   0:00 [kcompactd0]
+root          23  0.0  0.0      0     0 ?        SN   02:03   0:00 [ksmd]
+root          24  0.0  0.0      0     0 ?        SN   02:03   0:00 [khugepaged]
+root          70  0.0  0.0      0     0 ?        I<   02:03   0:00 [kintegrityd]
+root          71  0.0  0.0      0     0 ?        I<   02:03   0:00 [kblockd]
+root          72  0.0  0.0      0     0 ?        I<   02:03   0:00 [blkcg_punt_bio]
+root          73  0.0  0.0      0     0 ?        I<   02:03   0:00 [tpm_dev_wq]
+root          74  0.0  0.0      0     0 ?        I<   02:03   0:00 [ata_sff]
+root          75  0.0  0.0      0     0 ?        I<   02:03   0:00 [md]
+root          76  0.0  0.0      0     0 ?        I<   02:03   0:00 [edac-poller]
+root          77  0.0  0.0      0     0 ?        I<   02:03   0:00 [devfreq_wq]
+root          78  0.0  0.0      0     0 ?        S    02:03   0:00 [watchdogd]
+root          79  0.0  0.0      0     0 ?        I    02:03   0:00 [kworker/u2:1-events_unbound]
+root          81  0.0  0.0      0     0 ?        S    02:03   0:00 [kswapd0]
+root          82  0.0  0.0      0     0 ?        S    02:03   0:00 [ecryptfs-kthrea]
+root          84  0.0  0.0      0     0 ?        I<   02:03   0:00 [kthrotld]
+root          85  0.0  0.0      0     0 ?        I<   02:03   0:00 [acpi_thermal_pm]
+root          86  0.0  0.0      0     0 ?        S    02:03   0:00 [scsi_eh_0]
+root          87  0.0  0.0      0     0 ?        I<   02:03   0:00 [scsi_tmf_0]
+root          88  0.0  0.0      0     0 ?        S    02:03   0:00 [scsi_eh_1]
+root          89  0.0  0.0      0     0 ?        I<   02:03   0:00 [scsi_tmf_1]
+root          91  0.0  0.0      0     0 ?        I<   02:03   0:00 [vfio-irqfd-clea]
+root          93  0.0  0.0      0     0 ?        I<   02:03   0:00 [ipv6_addrconf]
+root         102  0.0  0.0      0     0 ?        I<   02:03   0:00 [kstrp]
+root         105  0.0  0.0      0     0 ?        I<   02:03   0:00 [kworker/u3:0]
+root         118  0.0  0.0      0     0 ?        I<   02:03   0:00 [charger_manager]
+root         157  0.0  0.0      0     0 ?        S    02:03   0:00 [scsi_eh_2]
+root         158  0.0  0.0      0     0 ?        I<   02:03   0:00 [scsi_tmf_2]
+root         159  0.0  0.0      0     0 ?        I<   02:03   0:00 [kworker/0:1H-kblockd]
+root         164  0.0  0.0      0     0 ?        I<   02:03   0:00 [cryptd]
+root         224  0.0  0.0      0     0 ?        I<   02:04   0:00 [raid5wq]
+root         264  0.0  0.0      0     0 ?        S    02:04   0:00 [jbd2/vda1-8]
+root         265  0.0  0.0      0     0 ?        I<   02:04   0:00 [ext4-rsv-conver]
+root         336  0.0  0.4  35744  9196 ?        S<s  02:04   0:00 /lib/systemd/systemd-journald
+root         352  0.0  0.0      0     0 ?        I<   02:04   0:00 [ipmi-msghandler]
+root         447  0.0  0.0      0     0 ?        I<   02:04   0:00 [kaluad]
+root         448  0.0  0.0      0     0 ?        I<   02:04   0:00 [kmpath_rdacd]
+root         449  0.0  0.0      0     0 ?        I<   02:04   0:00 [kmpathd]
+root         450  0.0  0.0      0     0 ?        I<   02:04   0:00 [kmpath_handlerd]
+root         451  0.0  0.8 280196 17996 ?        SLsl 02:04   0:00 /sbin/multipathd -d -s
+root         461  0.0  0.0      0     0 ?        S<   02:04   0:00 [loop0]
+root         463  0.0  0.0      0     0 ?        S<   02:04   0:00 [loop1]
+root         464  0.0  0.0      0     0 ?        S<   02:04   0:00 [loop2]
+systemd+     483  0.0  0.2  90872  6048 ?        Ssl  02:04   0:00 /lib/systemd/systemd-timesyncd
+systemd+     546  0.0  0.3  19188  7868 ?        Ss   02:04   0:00 /lib/systemd/systemd-networkd
+systemd+     586  0.0  0.6  24564 12232 ?        Ss   02:04   0:00 /lib/systemd/systemd-resolved
+root         610  0.0  0.2  20036  5948 ?        Ss   02:04   0:00 /lib/systemd/systemd-udevd
+root         722  0.0  0.4 240920  9196 ?        Ssl  02:04   0:00 /usr/lib/accountsservice/accounts
+root         729  0.0  0.1   8536  2700 ?        Ss   02:04   0:00 /usr/sbin/cron -f
+message+     730  0.0  0.2   7664  4792 ?        Ss   02:04   0:00 /usr/bin/dbus-daemon --system --a
+root         737  0.0  0.9  29604 18312 ?        Ss   02:04   0:00 /usr/bin/python3 /usr/bin/network
+root         739  0.0  0.4 236308  8972 ?        Ssl  02:04   0:00 /usr/lib/policykit-1/polkitd --no
+syslog       744  0.0  0.2 224344  5184 ?        Ssl  02:04   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         745  0.1  2.4 743480 49296 ?        Ssl  02:04   0:01 /usr/lib/snapd/snapd
+root         746  0.0  0.3  17292  7676 ?        Ss   02:04   0:00 /lib/systemd/systemd-logind
+root         748  0.0  0.6 395492 13804 ?        Ssl  02:04   0:00 /usr/lib/udisks2/udisksd
+daemon       749  0.0  0.1   3792  2252 ?        Ss   02:04   0:00 /usr/sbin/atd -f
+root         794  0.0  0.6 318816 13676 ?        Ssl  02:04   0:00 /usr/sbin/ModemManager
+root         809  0.0  0.1   7352  2260 ttyS0    Ss+  02:04   0:00 /sbin/agetty -o -p -- \u --keep-b
+root         824  0.0  1.0 108112 20600 ?        Ssl  02:04   0:00 /usr/bin/python3 /usr/share/unatt
+root         910  0.0  0.3  12172  7316 ?        Ss   02:04   0:00 sshd: /usr/sbin/sshd -D [listener
+root        1648  0.0  0.2 1299172 5384 ?        Ssl  02:04   0:00 /opt/digitalocean/bin/droplet-age
+root        1754  0.0  0.0   5828  1708 tty1     Ss+  02:05   0:00 /sbin/agetty -o -p -- \u --noclea
+root        1768  0.0  0.4  13812  8804 ?        Ss   02:06   0:00 sshd: root@pts/0
+root        1790  0.0  0.4  19068  9612 ?        Ss   02:06   0:00 /lib/systemd/systemd --user
+root        1791  0.0  0.2 105160  4444 ?        S    02:06   0:00 (sd-pam)
+root        1890  0.0  0.2  10032  4984 pts/0    Ss   02:06   0:00 -bash
+root        3082  0.0  0.0      0     0 ?        I    02:19   0:00 [kworker/0:0-cgroup_destroy]
+mongodb     3242  1.0  5.1 1517544 104744 ?      Ssl  02:22   0:01 /usr/bin/mongod --config /etc/mon
+root        3328  0.0  0.1  10808  3568 pts/0    R+   02:25   0:00 ps -aux
+root@www22-gregdelozier-com:~# ps -aux | grep mongo
+mongodb     3242  0.9  5.1 1517544 104744 ?      Ssl  02:22   0:02 /usr/bin/mongod --config /etc/mongod.conf
+root        3330  0.0  0.0   8160   720 pts/0    S+   02:25   0:00 grep --color=auto mongo
+root@www22-gregdelozier-com:~# ps -aux | grep mongo | grep -v grep
+mongodb     3242  0.9  5.1 1517544 104744 ?      Ssl  02:22   0:02 /usr/bin/mongod --config /etc/mongod.conf
+root@www22-gregdelozier-com:~# top
+
+top - 02:27:24 up 23 min,  1 user,  load average: 0.07, 0.05, 0.07
+Tasks:  90 total,   1 running,  89 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.3 sy,  0.0 ni, 99.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :   1983.3 total,    686.5 free,    218.9 used,   1077.9 buff/cache
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   1615.2 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                              
+   3242 mongodb   20   0 1517544 105008  43924 S   0.7   5.2   0:02.56 mongod                               
+      7 root      20   0       0      0      0 I   0.3   0.0   0:00.15 kworker/0:1-events                   
+      1 root      20   0  105768  12876   8528 S   0.0   0.6   0:03.73 systemd                              
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd                             
+      3 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_gp                               
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_par_gp                           
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/0:0H-kblockd                 
+      8 root      20   0       0      0      0 I   0.0   0.0   0:00.06 kworker/u2:0-events_power_efficient  
+      9 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 mm_percpu_wq                         
+     10 root      20   0       0      0      0 S   0.0   0.0   0:00.19 ksoftirqd/0                          
+     11 root      20   0       0      0      0 I   0.0   0.0   0:00.54 rcu_sched                            
+     12 root      rt   0       0      0      0 S   0.0   0.0   0:00.00 migration/0                          
+     13 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 idle_inject/0                        
+     14 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/0                              
+     15 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kdevtmpfs                            
+     16 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 netns                                
+     17 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_tasks_kthre                      
+root@www22-gregdelozier-com:~# mongo
+MongoDB shell version v4.4.18
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("bb9d5cd4-8f83-4d4a-981d-9d70b217107f") }
+MongoDB server version: 4.4.18
+---
+The server generated these startup warnings when booting: 
+        2022-11-17T02:22:16.299+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+        2022-11-17T02:22:17.297+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use admin
+switched to db admin
+> db.createUser(
+... {
+... user:"AdminSammy",
+... pwd:passwordPrompt(),
+... roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+... }
+... 
+... )
+Enter password: 
+Successfully added user: {
+	"user" : "AdminSammy",
+	"roles" : [
+		{
+			"role" : "userAdminAnyDatabase",
+			"db" : "admin"
+		},
+		"readWriteAnyDatabase"
+	]
+}
+> exit
+bye
+root@www22-gregdelozier-com:~# mongo
+MongoDB shell version v4.4.18
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("64314800-d965-4a25-9bf2-1fdd0bd4e394") }
+MongoDB server version: 4.4.18
+---
+The server generated these startup warnings when booting: 
+        2022-11-17T02:22:16.299+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+        2022-11-17T02:22:17.297+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> exit
+bye
+root@www22-gregdelozier-com:~# vi /etc/mongod.conf
+root@www22-gregdelozier-com:~# systemctl restart mongod
+root@www22-gregdelozier-com:~# systemctl status mongod
+● mongod.service - MongoDB Database Server
+     Loaded: loaded (/lib/systemd/system/mongod.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2022-11-17 02:35:00 UTC; 19s ago
+       Docs: https://docs.mongodb.org/manual
+   Main PID: 3353 (mongod)
+     Memory: 157.5M
+     CGroup: /system.slice/mongod.service
+             └─3353 /usr/bin/mongod --config /etc/mongod.conf
+root@www22-gregdelozier-com:~# mongo
+MongoDB shell version v4.4.18
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("b32d6c99-3ae0-4e78-a05a-223c2ef8a3e6") }
+MongoDB server version: 4.4.18
+> show dbs
+> exit
+bye
+root@www22-gregdelozier-com:~# mongo -u AdminSammy -p --authenticationDatabase admin
+MongoDB shell version v4.4.18
+Enter password: 
+connecting to: mongodb://127.0.0.1:27017/?authSource=admin&compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("ae3f36e2-74b9-4b33-a444-bf6c5a036dce") }
+MongoDB server version: 4.4.18
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> 
